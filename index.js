@@ -11,135 +11,76 @@ const port = process.env.PORT || 3000;
 app.get('/', (req, res) => {
   res.send(`
     <!DOCTYPE html>
-    <html lang="tr">
+    <html lang="tr" data-theme="light">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>SANSAR</title>
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <style>
-            :root {
-                --primary: #2980b9;
-                --secondary: #2c3e50;
-                --accent: #27ae60;
-                --bg: #ecf0f1;
-                --text: #34495e;
-            }
             body {
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                 margin: 0;
                 padding: 0;
-                background-color: var(--bg);
-                color: var(--text);
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                min-height: 100vh;
+                overflow-x: hidden;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                background: linear-gradient(135deg, #4f46e5, #ec4899, #8b5cf6);
+                background-size: 400% 400%;
+                animation: gradientBG 15s ease infinite;
             }
-            header {
-                background-color: var(--secondary);
-                color: white;
-                width: 100%;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            @keyframes gradientBG {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
             }
-            header img {
-                max-width: 120px;
-                height: auto;
-                margin-bottom: 0.5rem;
-                border-radius: 8px;
+            .glass-panel {
+                background: rgba(255, 255, 255, 0.15);
+                backdrop-filter: blur(25px);
+                -webkit-backdrop-filter: blur(25px);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
             }
-            .container {
-                max-width: 800px;
-                margin: 2rem auto;
-                padding: 2rem;
-                background-color: white;
-                border-radius: 8px;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-                text-align: center;
-                width: 90%;
+            .blob {
+                position: absolute;
+                filter: blur(70px);
+                z-index: 0;
+                opacity: 0.7;
+                animation: float 10s infinite ease-in-out alternate;
             }
-            h1 {
-                color: var(--primary);
-                margin-bottom: 1rem;
-            }
-            .btn-group {
-                display: flex;
-                flex-direction: column;
-                gap: 1rem;
-                margin-top: 2rem;
-            }
-            @media (min-width: 600px) {
-                .btn-group {
-                    flex-direction: row;
-                    justify-content: center;
-                }
-            }
-            .btn {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                padding: 12px 24px;
-                border-radius: 5px;
-                text-decoration: none;
-                font-weight: bold;
-                transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
-                cursor: pointer;
-                color: white;
-            }
-            .btn-bot {
-                background-color: var(--primary);
-            }
-            .btn-bot:hover {
-                background-color: #1a6091;
-                transform: translateY(-2px);
-                box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            }
-            .btn-group-chat {
-                background-color: var(--accent);
-            }
-            .btn-group-chat:hover {
-                background-color: #1e8449;
-                transform: translateY(-2px);
-                box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            }
-            .icon {
-                margin-right: 10px;
-                width: 24px;
-                height: 24px;
-            }
-            footer {
-                margin-top: auto;
-                width: 100%;
-                background-color: var(--secondary);
-                color: white;
-                text-align: center;
-                padding: 1rem 0;
-                font-size: 0.9rem;
+            @keyframes float {
+                0% { transform: translateY(0px) scale(1); }
+                100% { transform: translateY(-40px) scale(1.1); }
             }
         </style>
     </head>
-    <body>
-        <header>
-            <img src="logo.jpg" alt="SANSAR Logo">
-            <h2>SANSAR</h2>
-        </header>
-        <div class="container">
-            <h1>SANSAR</h1>
-            <div class="btn-group">
-                <a href="https://t.me/sansarsohbett" class="btn btn-group-chat" target="_blank">
-                    <img src="https://telegram.org/img/t_logo.png" alt="Telegram Icon" class="icon">
+    <body class="min-h-screen flex items-center justify-center p-5 relative">
+        <div class="blob bg-purple-400 w-72 h-72 rounded-full top-10 left-10"></div>
+        <div class="blob bg-pink-400 w-72 h-72 rounded-full bottom-10 right-10" style="animation-delay: 2s;"></div>
+        <div class="blob bg-indigo-400 w-72 h-72 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style="animation-delay: 4s;"></div>
+
+        <div class="glass-panel relative z-10 w-full max-w-sm rounded-[2.5rem] p-8 flex flex-col items-center text-center">
+            <div class="avatar mb-6">
+                <div class="w-32 rounded-3xl shadow-2xl ring ring-white/40 ring-offset-base-100 ring-offset-2">
+                    <img src="logo.jpg" alt="SANSAR Logo" />
+                </div>
+            </div>
+            
+            <h1 class="text-4xl font-extrabold text-white mb-8 tracking-wider drop-shadow-lg">SANSAR</h1>
+            
+            <div class="w-full flex flex-col gap-5">
+                <a href="https://t.me/sansarsohbett" class="btn glass w-full h-16 rounded-2xl text-white text-lg font-semibold border-white/40 hover:bg-white/30 hover:border-white/70 hover:scale-105 transition-all duration-300">
+                    <i class='bx bxl-telegram text-3xl mr-2'></i>
                     Gruba Katıl
                 </a>
-                <a href="https://t.me/sansarmp3_bot" class="btn btn-bot" target="_blank">
-                    <img src="https://telegram.org/img/t_logo.png" alt="Bot Icon" class="icon">
+                <a href="https://t.me/sansarmp3_bot" class="btn glass w-full h-16 rounded-2xl text-white text-lg font-semibold border-white/40 hover:bg-white/30 hover:border-white/70 hover:scale-105 transition-all duration-300">
+                    <i class='bx bx-bot text-3xl mr-2'></i>
                     Botu Başlat
                 </a>
             </div>
+
+            <p class="mt-10 text-white/80 text-sm font-medium tracking-wide">Geliştirici: Deniz Efe | SANSAR © 2026</p>
         </div>
-        <footer>
-            <p>Geliştirici: Deniz Efe | SANSAR © 2026</p>
-        </footer>
     </body>
     </html>
   `);
@@ -190,26 +131,38 @@ bot.on('message', async (msg) => {
           const playInfo = await playdl.stream(videoUrl);
           stream = playInfo.stream;
         } catch (err3) {
-          bot.editMessageText('Hiçbir modül bu videoyu indiremedi. Kısıtlamalı olabilir.', { chat_id: chatId, message_id: statusMsg.message_id });
+          bot.editMessageText('Hiçbir modül bu videoyu indiremedi. Kısıtlamalı olabilir.', { chat_id: chatId, message_id: statusMsg.message_id }).catch(()=>{});
           return;
         }
       }
     }
 
     if (stream) {
-      bot.editMessageText('İşlem yapılıyor, az kaldı... 🚀', { chat_id: chatId, message_id: statusMsg.message_id });
+      bot.editMessageText('İşlem yapılıyor, az kaldı... 🚀', { chat_id: chatId, message_id: statusMsg.message_id }).catch(()=>{});
       
       const writeStream = fs.createWriteStream(filePath);
+      
+      stream.on('error', (err) => {
+        bot.editMessageText('YouTube bağlantıyı kesti veya hız çok yavaş. Lütfen tekrar dene.', { chat_id: chatId, message_id: statusMsg.message_id }).catch(()=>{});
+        writeStream.end();
+        if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+      });
+
       stream.pipe(writeStream);
 
       writeStream.on('finish', async () => {
-        await bot.sendAudio(chatId, filePath);
-        fs.unlinkSync(filePath);
-        bot.deleteMessage(chatId, statusMsg.message_id);
+        try {
+          await bot.sendAudio(chatId, filePath);
+          bot.deleteMessage(chatId, statusMsg.message_id).catch(()=>{});
+        } catch (sendErr) {
+          bot.editMessageText('Dosya Telegrama yüklenirken hata oluştu (Dosya boyutu çok büyük olabilir).', { chat_id: chatId, message_id: statusMsg.message_id }).catch(()=>{});
+        } finally {
+          if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+        }
       });
 
       writeStream.on('error', (err) => {
-        bot.editMessageText('İşlem sırasında bir sorun oluştu.', { chat_id: chatId, message_id: statusMsg.message_id });
+        bot.editMessageText('Dosya işlenirken bir sorun oluştu.', { chat_id: chatId, message_id: statusMsg.message_id }).catch(()=>{});
         if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
       });
     }
