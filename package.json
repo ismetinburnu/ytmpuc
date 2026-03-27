@@ -1,25 +1,13 @@
 {
-
-  "name": "sansar-ml3",
-
+  "name": "sansar-mp3",
   "version": "1.0.0",
-
   "main": "index.js",
-
   "scripts": {
-
     "start": "node index.js"
-
   },
-
   "dependencies": {
-
     "express": "^4.19.2",
-
     "node-telegram-bot-api": "^0.65.0",
-
     "ytdl-core": "^4.11.5"
-
   }
-
 }
