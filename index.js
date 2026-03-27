@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000;
 app.get('/', (req, res) => {
   res.send(`
     <!DOCTYPE html>
-    <html lang="tr" data-theme="light">
+    <html lang="tr" data-theme="dark">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
                 padding: 0;
                 overflow-x: hidden;
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-                background: linear-gradient(135deg, #4f46e5, #ec4899, #8b5cf6);
+                background: linear-gradient(135deg, #1f2937, #111827, #1f2937);
                 background-size: 400% 400%;
                 animation: gradientBG 15s ease infinite;
             }
@@ -35,17 +35,17 @@ app.get('/', (req, res) => {
                 100% { background-position: 0% 50%; }
             }
             .glass-panel {
-                background: rgba(255, 255, 255, 0.15);
-                backdrop-filter: blur(25px);
-                -webkit-backdrop-filter: blur(25px);
-                border: 1px solid rgba(255, 255, 255, 0.3);
-                box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(30px);
+                -webkit-backdrop-filter: blur(30px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.4);
             }
             .blob {
                 position: absolute;
                 filter: blur(70px);
                 z-index: 0;
-                opacity: 0.7;
+                opacity: 0.6;
                 animation: float 10s infinite ease-in-out alternate;
             }
             @keyframes float {
@@ -55,38 +55,40 @@ app.get('/', (req, res) => {
         </style>
     </head>
     <body class="min-h-screen flex items-center justify-center p-5 relative">
-        <div class="blob bg-purple-400 w-72 h-72 rounded-full top-10 left-10"></div>
-        <div class="blob bg-pink-400 w-72 h-72 rounded-full bottom-10 right-10" style="animation-delay: 2s;"></div>
-        <div class="blob bg-indigo-400 w-72 h-72 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style="animation-delay: 4s;"></div>
+        <div class="blob bg-indigo-950 w-80 h-80 rounded-full top-10 left-10"></div>
+        <div class="blob bg-purple-950 w-80 h-80 rounded-full bottom-10 right-10" style="animation-delay: 2s;"></div>
+        <div class="blob bg-blue-950 w-80 h-80 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style="animation-delay: 4s;"></div>
 
-        <div class="glass-panel relative z-10 w-full max-w-sm rounded-[2.5rem] p-8 flex flex-col items-center text-center">
-            <div class="avatar mb-6">
-                <div class="w-32 rounded-3xl shadow-2xl ring ring-white/40 ring-offset-base-100 ring-offset-2">
-                    <img src="logo.jpg" alt="SANSAR Logo" />
+        <div class="glass-panel relative z-10 w-full max-w-sm rounded-[2.5rem] p-10 flex flex-col items-center text-center">
+            <div class="avatar mb-8">
+                <div class="w-36 rounded-3xl shadow-2xl ring-2 ring-white/10 ring-offset-base-100 ring-offset-2">
+                    <img src="https://ik.imagekit.io/ndcus6yaa/logo.jpg" alt="SANSAR Logo" />
                 </div>
             </div>
             
-            <h1 class="text-4xl font-extrabold text-white mb-8 tracking-wider drop-shadow-lg">SANSAR</h1>
+            <h1 class="text-4xl font-extrabold text-white mb-10 tracking-wider drop-shadow-xl">SANSAR</h1>
             
-            <div class="w-full flex flex-col gap-5">
-                <a href="https://t.me/sansarsohbett" class="btn glass w-full h-16 rounded-2xl text-white text-lg font-semibold border-white/40 hover:bg-white/30 hover:border-white/70 hover:scale-105 transition-all duration-300">
-                    <i class='bx bxl-telegram text-3xl mr-2'></i>
+            <div class="w-full flex flex-col gap-6">
+                <a href="https://t.me/sansarsohbett" class="btn glass w-full h-18 rounded-2xl text-white text-xl font-bold border-white/10 hover:bg-white/10 hover:border-white/20 hover:scale-105 transition-all duration-300 shadow-lg">
+                    <i class='bx bxl-telegram text-4xl mr-3'></i>
                     Gruba Katıl
                 </a>
-                <a href="https://t.me/sansarmp3_bot" class="btn glass w-full h-16 rounded-2xl text-white text-lg font-semibold border-white/40 hover:bg-white/30 hover:border-white/70 hover:scale-105 transition-all duration-300">
-                    <i class='bx bx-bot text-3xl mr-2'></i>
+                <a href="https://t.me/sansarmp3_bot" class="btn glass w-full h-18 rounded-2xl text-white text-xl font-bold border-white/10 hover:bg-white/10 hover:border-white/20 hover:scale-105 transition-all duration-300 shadow-lg">
+                    <i class='bx bx-bot text-4xl mr-3'></i>
                     Botu Başlat
                 </a>
             </div>
 
-            <p class="mt-10 text-white/80 text-sm font-medium tracking-wide">Geliştirici: Deniz Efe | SANSAR © 2026</p>
+            <p class="mt-12 text-white/50 text-sm font-medium tracking-wide">v2.1 Dark Edition</p>
         </div>
     </body>
     </html>
   `);
 });
 
-app.listen(port, () => {});
+app.listen(port, () => {
+  console.log(`Sunucu http://localhost:${port} adresinde çalışıyor`);
+});
 
 const token = '8723309637:AAGmEdIg9aTjl8aSNLYPaEMHxleTE6Ioj60';
 const bot = new TelegramBot(token, { polling: true });
@@ -155,7 +157,7 @@ bot.on('message', async (msg) => {
           await bot.sendAudio(chatId, filePath);
           bot.deleteMessage(chatId, statusMsg.message_id).catch(()=>{});
         } catch (sendErr) {
-          bot.editMessageText('Dosya Telegrama yüklenirken hata oluştu (Dosya boyutu çok büyük olabilir).', { chat_id: chatId, message_id: statusMsg.message_id }).catch(()=>{});
+          bot.editMessageText('Dosya Telegrama yüklenirken hata oluştu (YouTube bağlantıyı kesti veya hız çok yavaş).', { chat_id: chatId, message_id: statusMsg.message_id }).catch(()=>{});
         } finally {
           if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
         }
